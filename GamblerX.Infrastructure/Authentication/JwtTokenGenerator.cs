@@ -1,19 +1,24 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Security.Cryptography;
+using System.Text;
 using GamblerX.Application.Common.Interfaces.Authentication;
 using GamblerX.Application.Common.Interfaces.Services;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 
 namespace GamblerX.Infrastructure.Authentication;
 
 public class JwtTokenGenerator : IJwTokenGenerator
 {
+   
+   private readonly JwtSettings _jwtSettings;
    private readonly IDateTimeProvider _dateTimeProvider;
 
-   public JwtTokenGenerator(IDateTimeProvider dateTimeProvider)
+   public JwtTokenGenerator(IDateTimeProvider dateTimeProvider, IOptions<JwtSettings> jwtOptions)
     {
         _dateTimeProvider = dateTimeProvider;
+        _jwtSettings = jwtOptions.Value;
     }
    
    
@@ -22,12 +27,8 @@ public class JwtTokenGenerator : IJwTokenGenerator
        //lets setup a SymmetricSecurityKey and use it to set up 
        //signing credentials for JWT authentication
                
-        // Generate a 256-bit key 
-        byte[] secretKeyBytes = new byte[32];
-        using (var rng = RandomNumberGenerator.Create()) 
-        {
-            rng.GetBytes(secretKeyBytes);
-        }
+     // Generate a 256-bit key 
+        byte[] secretKeyBytes = Encoding.UTF8.GetBytes(_jwtSettings.Secret);
         
         // Create a SymmetricSecurityKey using the secretKeyBytes
         var securityKey = new SymmetricSecurityKey(secretKeyBytes);
@@ -48,8 +49,9 @@ public class JwtTokenGenerator : IJwTokenGenerator
         };
 
         var securityToken = new JwtSecurityToken(
-            issuer: "GamblerX",
-            expires: _dateTimeProvider.UtcNow.AddMinutes(60),  // 1 hour expiry
+            issuer: _jwtSettings.Issuer,
+            audience: _jwtSettings.Audience,
+            expires: _dateTimeProvider.UtcNow.AddMinutes(_jwtSettings.ExpiryMinutes),  // 1 hour expiry
             claims: claims,
             signingCredentials: signingCredentials
         );

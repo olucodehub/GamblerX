@@ -3,9 +3,9 @@ using GamblerX.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services
-    .AddInfrastructure()
-    .AddApplication();
+builder.Services   
+    .AddApplication()
+    .AddInfrastructure(builder.Configuration);
     
 builder.Services.AddControllers();
 
