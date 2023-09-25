@@ -20,12 +20,6 @@ public class AuthenticationController : ControllerBase
     [HttpPost("register")]
     public IActionResult Register(RegisterRequest request)
     {
-            //        //Get userId and bearer token 
-            // var userId = User..GetNameIdentifierId();
-            // var username = HttpContext.User.FindFirstValue("name");
-            // var token = HttpContext.Request.Headers[HeaderNames.Authorization];
-       
-       
         var authResult = _authenticationService.Register(
             request.FirstName, 
             request.LastName,
