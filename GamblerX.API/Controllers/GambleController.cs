@@ -35,6 +35,7 @@ public class GambleController : ControllerBase
             {
                 Account = playerAccount,
                 Status = "won",
+                Answer = randomNumber,
                 Points = winnings
             };
             return Ok(response);
@@ -46,6 +47,7 @@ public class GambleController : ControllerBase
             {
                 Account = playerAccount,
                 Status = "lost",
+                Answer = randomNumber,
                 Points = -betRequest.Points
             };
             return Ok(response);
