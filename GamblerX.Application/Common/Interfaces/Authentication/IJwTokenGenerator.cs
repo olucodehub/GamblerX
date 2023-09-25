@@ -1,7 +1,9 @@
+using GamblerX.Domain.Entities;
+
 namespace GamblerX.Application.Common.Interfaces.Authentication;
 
 
 public interface IJwTokenGenerator
 {
-    string GenerateToken(Guid userId, string firstName, string lastName);
+    string GenerateToken(User user);
 }

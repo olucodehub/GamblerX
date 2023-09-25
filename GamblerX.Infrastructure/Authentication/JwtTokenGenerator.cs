@@ -4,6 +4,7 @@ using System.Security.Cryptography;
 using System.Text;
 using GamblerX.Application.Common.Interfaces.Authentication;
 using GamblerX.Application.Common.Interfaces.Services;
+using GamblerX.Domain.Entities;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 
@@ -22,7 +23,7 @@ public class JwtTokenGenerator : IJwTokenGenerator
     }
    
    
-    public string GenerateToken(Guid userId, string firstName, string lastName)
+    public string GenerateToken(User user)
     {
        //lets setup a SymmetricSecurityKey and use it to set up 
        //signing credentials for JWT authentication
@@ -42,9 +43,9 @@ public class JwtTokenGenerator : IJwTokenGenerator
        // setup the associated claims
         var claims = new[]
         {
-            new Claim(JwtRegisteredClaimNames.Sub, userId.ToString()),
-             new Claim(JwtRegisteredClaimNames.GivenName, firstName),
-            new Claim(JwtRegisteredClaimNames.FamilyName, lastName),
+            new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
+             new Claim(JwtRegisteredClaimNames.GivenName, user.FirstName),
+            new Claim(JwtRegisteredClaimNames.FamilyName, user.LastName),
             new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
         };
 

@@ -20,6 +20,12 @@ public class AuthenticationController : ControllerBase
     [HttpPost("register")]
     public IActionResult Register(RegisterRequest request)
     {
+            //        //Get userId and bearer token 
+            // var userId = User..GetNameIdentifierId();
+            // var username = HttpContext.User.FindFirstValue("name");
+            // var token = HttpContext.Request.Headers[HeaderNames.Authorization];
+       
+       
         var authResult = _authenticationService.Register(
             request.FirstName, 
             request.LastName,
@@ -28,10 +34,10 @@ public class AuthenticationController : ControllerBase
 
 // map result to data contracted for this kind of response
         var response = new AuthenticationResponse(
-            authResult.Id,
-            authResult.FirstName,
-            authResult.LastName,
-            authResult.Email,
+            authResult.User.Id,
+            authResult.User.FirstName,
+            authResult.User.LastName,
+            authResult.User.Email,
             authResult.Token);
 
 
@@ -47,10 +53,10 @@ public class AuthenticationController : ControllerBase
             request.Password);
 
         var response = new AuthenticationResponse(
-            authResult.Id,
-            authResult.FirstName,
-            authResult.LastName,
-            authResult.Email,
+            authResult.User.Id,
+            authResult.User.FirstName,
+            authResult.User.LastName,
+            authResult.User.Email,
             authResult.Token);
 
 
