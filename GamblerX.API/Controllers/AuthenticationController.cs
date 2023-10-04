@@ -21,21 +21,24 @@ public class AuthenticationController : ControllerBase
     public IActionResult Register(RegisterRequest request)
     {
         var authResult = _authenticationService.Register(
-            request.FirstName, 
-            request.LastName,
-            request.Email, 
-            request.Password);
-
-// map result to data contracted for this kind of response
-        var response = new AuthenticationResponse(
-            authResult.User.Id,
-            authResult.User.FirstName,
-            authResult.User.LastName,
-            authResult.User.Email,
-            authResult.Token);
+            request.FirstName ?? string.Empty, 
+            request.LastName ?? string.Empty,  
+            request.Email ?? string.Empty,     
+            request.Password ?? string.Empty   
+        );
 
 
-        return Ok(response);
+        // map result to data contracted for this kind of response
+                var response = new AuthenticationResponse
+                {
+                    Id = authResult.User.Id,
+                    FirstName = authResult.User.FirstName,
+                    LastName = authResult.User.LastName,
+                    Email = authResult.User.Email,
+                    Token = authResult.Token
+                };
+                
+                return Ok(response);
     }
     
 
@@ -43,15 +46,17 @@ public class AuthenticationController : ControllerBase
     public IActionResult Login(LoginRequest request)
     {
             var authResult = _authenticationService.Login(
-            request.Email, 
-            request.Password);
+            string.IsNullOrEmpty(request.Email) ? string.Empty : request.Email, 
+            string.IsNullOrEmpty(request.Password) ? string.Empty : request.Password);
 
-        var response = new AuthenticationResponse(
-            authResult.User.Id,
-            authResult.User.FirstName,
-            authResult.User.LastName,
-            authResult.User.Email,
-            authResult.Token);
+        var response = new AuthenticationResponse
+        {
+            Id = authResult.User.Id,
+            FirstName = authResult.User.FirstName,
+            LastName = authResult.User.LastName,
+            Email = authResult.User.Email,
+            Token = authResult.Token
+        };
 
 
         return Ok(response);

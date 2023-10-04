@@ -1,5 +1,3 @@
-
-using System.Security.Claims;
 using Microsoft.AspNetCore.Authorization;
 using GamblerX.Contracts.Bet;
 using Microsoft.AspNetCore.Mvc;
@@ -13,12 +11,11 @@ public class GambleController : ControllerBase
 {
     private static readonly Random random = new Random();
     private int playerAccount = 10000;
-
    
     [HttpPost("place-bet")]
-    public ActionResult<BetResult> PlaceBet([FromBody] BetRequest betRequest)
+    public ActionResult PlaceBet([FromBody] BetRequest betRequest)
     {
-        var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;  // gets the logged in user's Id
+        //var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;  // gets the logged in user's Id
        
         // Check invalid  user entry
         if (betRequest.Points <= 0 || betRequest.Points > playerAccount || betRequest.Number < 0 || betRequest.Number > 9)

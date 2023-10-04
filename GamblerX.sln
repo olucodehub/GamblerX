@@ -13,6 +13,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GamblerX.Domain", "GamblerX
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GamblerX.Infrastructure", "GamblerX.Infrastructure\GamblerX.Infrastructure.csproj", "{D96B391F-C4AE-4E6C-AFE3-F544E5C18949}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GamblerX.Tests", "GamblerX.Tests\GamblerX.Tests.csproj", "{7D7F94E5-8660-4EEE-A1D6-27C200425F05}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -42,5 +44,9 @@ Global
 		{D96B391F-C4AE-4E6C-AFE3-F544E5C18949}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{D96B391F-C4AE-4E6C-AFE3-F544E5C18949}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{D96B391F-C4AE-4E6C-AFE3-F544E5C18949}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7D7F94E5-8660-4EEE-A1D6-27C200425F05}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7D7F94E5-8660-4EEE-A1D6-27C200425F05}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7D7F94E5-8660-4EEE-A1D6-27C200425F05}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7D7F94E5-8660-4EEE-A1D6-27C200425F05}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

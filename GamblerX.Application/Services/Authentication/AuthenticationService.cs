@@ -41,9 +41,11 @@ public class AuthenticationService : IAuthenticationService
         // Create JWT token
         var token = _jwTokenGenerator.GenerateToken(user);
         
-        return new AuthenticationResult(
-            user,
-            token);
+        return new AuthenticationResult
+        {
+            User = user,
+            Token = token
+        };
     }
 
     
@@ -64,8 +66,10 @@ public class AuthenticationService : IAuthenticationService
         // Create JWT Token
         var token = _jwTokenGenerator.GenerateToken(user);
         
-        return new AuthenticationResult(
-            user,
-            token);
+        return new AuthenticationResult
+        {
+            User = user,
+            Token = token
+        };
     }
 }
