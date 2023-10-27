@@ -10,8 +10,7 @@ using Microsoft.IdentityModel.Tokens;
 namespace GamblerX.Infrastructure.Authentication;
 
 public class JwtTokenGenerator : IJwTokenGenerator
-{
-   
+{ 
    private readonly JwtSettings _jwtSettings;
    private readonly IDateTimeProvider _dateTimeProvider;
 
@@ -43,8 +42,7 @@ public class JwtTokenGenerator : IJwTokenGenerator
         var claims = new[]
         {
             new Claim(JwtRegisteredClaimNames.Sub, user.Id.ToString()),
-             new Claim(JwtRegisteredClaimNames.GivenName, user.FirstName),
-            new Claim(JwtRegisteredClaimNames.FamilyName, user.LastName),
+             new Claim(JwtRegisteredClaimNames.GivenName, user.UserName),
             new Claim(JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
         };
 

@@ -18,7 +18,7 @@ public class AuthenticationService : IAuthenticationService
    
    
    
-    public AuthenticationResult Register(string firstName, string lastName, string email, string password)
+    public AuthenticationResult Register(string userName, string email, string password)
     {
         // Validate User does not exist
         if(_userRepository.GetUserByEmail(email) is not null)
@@ -26,11 +26,16 @@ public class AuthenticationService : IAuthenticationService
             throw new Exception("User already exists");
         }
 
+        // Validate UserName does not exist
+        if(_userRepository.GetUserByUserName(userName) is not null)
+        {
+            throw new Exception("UserName already exists");
+        }
+
         // Create user (Generate unique ID) and Persist to DB
         var user = new User
         {
-            FirstName = firstName,
-            LastName = lastName,
+            UserName = userName,
             Email = email,
             Password = password
         };

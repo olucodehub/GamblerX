@@ -21,16 +21,14 @@ public class AuthenticationController : ControllerBase
     public IActionResult Register(RegisterRequest request)
     {
         var authResult = _authenticationService.Register(
-            request.FirstName, 
-            request.LastName,
+            request.UserName,
             request.Email, 
             request.Password);
 
 // map result to data contracted for this kind of response
         var response = new AuthenticationResponse(
             authResult.User.Id,
-            authResult.User.FirstName,
-            authResult.User.LastName,
+            authResult.User.UserName,
             authResult.User.Email,
             authResult.Token);
 
@@ -48,8 +46,7 @@ public class AuthenticationController : ControllerBase
 
         var response = new AuthenticationResponse(
             authResult.User.Id,
-            authResult.User.FirstName,
-            authResult.User.LastName,
+            authResult.User.UserName,
             authResult.User.Email,
             authResult.Token);
 

@@ -9,9 +9,22 @@ using Microsoft.AspNetCore.Mvc.Infrastructure;
 using GamblerX.API.Errors;
 using GamblerX.API.Middleware;
 using Microsoft.AspNetCore.Diagnostics;
+using GamblerX.Application.Common.Interfaces.Persistence;
+using GamblerX.Infrastructure.Persistence;
+using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
 {
+    // Load configuration from appsettings.json
+    var config = new ConfigurationBuilder()
+    .SetBasePath(builder.Environment.ContentRootPath)
+    .AddJsonFile("appsettings.json")
+    .Build();
+
+    // Get the connection string from configuration
+    var connectionString = config.GetConnectionString("MyDatabaseConnection");
+    
+    
     builder.Services
         .AddApplication()
         .AddInfrastructure(builder.Configuration)
@@ -36,6 +49,15 @@ var builder = WebApplication.CreateBuilder(args);
 
     // Error handler 3
    // builder.Services.AddSingleton<ProblemDetailsFactory, GamblerXProblemDetailsFactory>();
+
+
+    builder.Services.AddDbContext<MyDbContext>(options =>
+    {
+        options.UseSqlServer(connectionString); // Replace with the appropriate database provider
+    });
+
+    // Register your repository as a service
+    builder.Services.AddScoped<IUserRepository, UserRepository>();
 }
 
 var app = builder.Build();

@@ -1,4 +1,4 @@
-@host=http://localhost:5221
+@host=http://localhost:5000
 
 
 POST {{host}}/auth/login

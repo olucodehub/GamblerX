@@ -6,4 +6,8 @@ obj/
 *.cache
 *.json
 *.editorconfig
-
+*.suo
+*.v5.2
+*.lock
+*.v2
+*.vsidx
