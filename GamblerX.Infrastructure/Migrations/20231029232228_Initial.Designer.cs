@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace GamblerX.Infrastructure.Migrations
 {
     [DbContext(typeof(MyDbContext))]
-    [Migration("20231027211742_Initial")]
+    [Migration("20231029232228_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -30,6 +30,9 @@ namespace GamblerX.Infrastructure.Migrations
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("uniqueidentifier");
+
+                    b.Property<float>("Balance")
+                        .HasColumnType("real");
 
                     b.Property<string>("Email")
                         .IsRequired()

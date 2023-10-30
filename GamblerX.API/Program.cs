@@ -12,6 +12,9 @@ using Microsoft.AspNetCore.Diagnostics;
 using GamblerX.Application.Common.Interfaces.Persistence;
 using GamblerX.Infrastructure.Persistence;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authentication;
+
 
 var builder = WebApplication.CreateBuilder(args);
 {
@@ -58,6 +61,7 @@ var builder = WebApplication.CreateBuilder(args);
 
     // Register your repository as a service
     builder.Services.AddScoped<IUserRepository, UserRepository>();
+    builder.Services.AddScoped<IBettingRepository, BettingRepository>();
 }
 
 var app = builder.Build();
@@ -80,7 +84,7 @@ var app = builder.Build();
 
     app.UseAuthentication(); // Include authentication middleware
 
-    app.UseAuthorization();
+    app.UseAuthorization(); // Configure role-based authorization
 
     app.MapControllers();
 

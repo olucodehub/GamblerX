@@ -1,5 +1,9 @@
 # GamblerX
 
+# To Do
+# 1. Implement role based authorization on the Betting Controller to ensure for ex: Only admin users can add/update a Betting 
+# End To Do
+
 App following clean architecture and DDD principles.
 
 Clone and Restore nugget package with command "dotnet restore"

@@ -1,16 +1,23 @@
 using GamblerX.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace GamblerX.Infrastructure.Persistence
+namespace GamblerX.Infrastructure
 {
     public class MyDbContext : DbContext
     {
+        public MyDbContext()
+        {
+            
+        }
+        
         public MyDbContext(DbContextOptions<MyDbContext> options)
             : base(options)
         {
         }
 
         public DbSet<User> Users { get; set; }
+        public DbSet<Betting> Bettings { get; set; }
+        public DbSet<Bettor> Bettors { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
