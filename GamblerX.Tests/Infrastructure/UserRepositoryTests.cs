@@ -1,5 +1,6 @@
 using System;
 using System.Linq;
+using GamblerX.Infrastructure;
 using GamblerX.Infrastructure.Persistence;
 using GamblerX.Domain.Entities;
 
@@ -64,14 +65,6 @@ namespace GamblerX.Tests.Infrastructure
 
                 // Assert
                 Assert.Null(result);
-            }
-
-
-            // To address the warning, you can simply ignore it. The Dispose method is part of the IDisposable pattern and is called automatically by xUnit when the test class is disposed. It's not meant to be a test, so there's no need to mark it with [Fact]. You can safely ignore this warning, and your tests should run correctly.
-            public void Dispose()
-            {
-                _dbContext.Dispose();
-                _fixture.Dispose();
             }
     }
 

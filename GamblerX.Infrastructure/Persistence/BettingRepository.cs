@@ -34,6 +34,7 @@ public class BettingRepository : IBettingRepository
         // Update properties of existingBetting with updatedBetting  
         existingBetting.EventName = updatedBetting.EventName;
         existingBetting.EventTime = updatedBetting.EventTime;
+        existingBetting.EventImageUrl = updatedBetting.EventImageUrl;
         existingBetting.BetCountTeam1 = updatedBetting.BetCountTeam1;
         existingBetting.BetCountTeam2 = updatedBetting.BetCountTeam2;
         existingBetting.TotalBetValueTeam1 = updatedBetting.TotalBetValueTeam1;

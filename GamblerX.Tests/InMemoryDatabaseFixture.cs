@@ -1,4 +1,4 @@
-using GamblerX.Infrastructure.Persistence;
+using GamblerX.Infrastructure;
 using Microsoft.EntityFrameworkCore;
 using System;
 
