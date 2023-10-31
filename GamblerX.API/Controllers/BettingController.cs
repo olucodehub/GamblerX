@@ -53,11 +53,7 @@ public class BettingController : ControllerBase
             Id = id,
             EventName = updateRequest.EventName,
             EventTime = updateRequest.EventTime,
-            EventImageUrl = updateRequest.EventImageUrl,
-            BetCountTeam1 = updateRequest.BetCountTeam1,
-            BetCountTeam2 = updateRequest.BetCountTeam2,
-            TotalBetValueTeam1 = updateRequest.TotalBetValueTeam1,
-            TotalBetValueTeam2 = updateRequest.TotalBetValueTeam2
+            EventImageUrl = updateRequest.EventImageUrl
         };
 
         var result = await _bettingService.UpdateBettingAsync(id, updatedBetting);
