@@ -29,7 +29,7 @@ public class BettingController : ControllerBase
     public async Task<IActionResult> RegisterEvent(BettingRequest request)
     {
         //var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;  // gets the logged in user's Id
-        var betResult = await _bettingService.AddBettingAsync(new Betting
+        var betResult = await _bettingService.AddBettingEvent(new Betting
         {
             EventName = request.EventName,
             EventTime = request.EventTime,
@@ -56,7 +56,7 @@ public class BettingController : ControllerBase
             EventImageUrl = updateRequest.EventImageUrl
         };
 
-        var result = await _bettingService.UpdateBettingAsync(id, updatedBetting);
+        var result = await _bettingService.UpdateBettingEvent(id, updatedBetting);
 
         if (result == null)
         {
@@ -67,9 +67,9 @@ public class BettingController : ControllerBase
     }
 
     [HttpDelete("delete-event/{id}")]
-    public async Task<IActionResult> DeleteBettingAsync(Guid id)
+    public async Task<IActionResult> DeleteEvent(Guid id)
     {
-        var result = await _bettingService.DeleteBettingAsync(id);
+        var result = await _bettingService.DeleteBettingEvent(id);
 
         if (!result)
         {
@@ -77,5 +77,26 @@ public class BettingController : ControllerBase
         }
 
         return NoContent(); // Return 204 No Content to indicate successful deletion
+    }
+
+    [HttpPost("place-bet")]
+    public async Task<IActionResult> PlaceBet(BettorRequest request)
+    {
+        var userclaim = User.FindFirst(ClaimTypes.NameIdentifier);  
+        if (userclaim == null)
+        {
+            return NotFound("User not found");
+        }
+
+        var userid = userclaim.Value;
+
+        var result = await _bettingService.PlaceBet(new Bettor
+        {
+            UserId = Guid.Parse(userid),
+            BettingId = request.BettingId,
+            AmountBet = request.AmountBet,
+            TeamSelected = request.TeamSelected
+        });
+        return Ok(result);
     }
 }

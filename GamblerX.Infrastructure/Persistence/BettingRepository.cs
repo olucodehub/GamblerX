@@ -16,14 +16,27 @@ public class BettingRepository : IBettingRepository
         _context = context;
     }
 
-    public async Task<Betting> AddBettingAsync(Betting betting)
+    #region Betting Event
+
+    public async Task<Betting> AddBettingEventAsync(Betting betting)
     {
         _context.Bettings.Add(betting);
         await _context.SaveChangesAsync();
         return betting;
     }
 
-    public async Task<Betting?> UpdateBettingAsync(Guid id, Betting updatedBetting)  
+    public async Task<Betting?> GetBettingEventAsync(Guid id)  
+    {
+        var betEvent = await _context.Bettings.FindAsync(id);
+        if (betEvent == null)
+        {
+            return null;
+        }
+
+        return betEvent;
+    }
+
+    public async Task<Betting?> UpdateBettingEventAsync(Guid id, Betting updatedBetting)  
     {
         var existingBetting = await _context.Bettings.FindAsync(id);
         if (existingBetting == null)
@@ -40,7 +53,7 @@ public class BettingRepository : IBettingRepository
         return existingBetting;
     }
 
-    public async Task<bool> DeleteBettingAsync(Guid id)
+    public async Task<bool> DeleteBettingEventAsync(Guid id)
     {
         var betting = await _context.Bettings.FindAsync(id);
         if (betting == null)
@@ -53,5 +66,26 @@ public class BettingRepository : IBettingRepository
         await _context.SaveChangesAsync();
         return true;
     }
+    #endregion
+
+    #region Bettor
+    public async Task<Bettor> AddBettorAsync(Bettor bettor)
+    {
+        _context.Bettors.Add(bettor);
+        await _context.SaveChangesAsync();
+        return bettor;
+    }
+
+    public async Task UpdateUserBalanceAsync(User user, double amount)  
+    {
+        user.Balance -= (float)amount;
+
+        await _context.SaveChangesAsync();
+  
+    }
+
+
+    #endregion
+
 
 }

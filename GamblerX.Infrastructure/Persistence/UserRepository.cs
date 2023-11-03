@@ -1,3 +1,4 @@
+using System;
 using GamblerX.Application.Common.Interfaces.Persistence;
 using GamblerX.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
@@ -28,5 +29,10 @@ public class UserRepository : IUserRepository
     public User? GetUserByUserName(string username)
     {
         return _context.Users.SingleOrDefault(x => x.UserName == username);
+    }
+
+    public async Task<User?> GetUserById(Guid id)
+    {
+       return await _context.Users.SingleOrDefaultAsync(x => x.Id == id);
     }
 }

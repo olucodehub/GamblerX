@@ -30,7 +30,7 @@ namespace GamblerX.Tests.Infrastructure
             var betting = new Betting { Id = Guid.NewGuid(), EventName = "Chelsea Vs Arsenal", EventTime = DateTime.Now };
 
             // Act
-            var addedBetting = await repository.AddBettingAsync(betting);
+            var addedBetting = await repository.AddBettingEventAsync(betting);
 
             // Assert
             Assert.NotNull(addedBetting);
@@ -56,7 +56,7 @@ namespace GamblerX.Tests.Infrastructure
             };
 
             // Act
-            var result = await repository.UpdateBettingAsync(betting.Id, updatedBetting);
+            var result = await repository.UpdateBettingEventAsync(betting.Id, updatedBetting);
 
             // Assert
             Assert.NotNull(result);
@@ -74,7 +74,7 @@ namespace GamblerX.Tests.Infrastructure
             var updatedBetting = new Betting { Id = nonExistentId, EventName = "Updated Event" };
 
             // Act
-            var result = await repository.UpdateBettingAsync(nonExistentId, updatedBetting);
+            var result = await repository.UpdateBettingEventAsync(nonExistentId, updatedBetting);
 
             // Assert
             Assert.Null(result);
@@ -90,7 +90,7 @@ namespace GamblerX.Tests.Infrastructure
             _dbContext.SaveChanges();
 
             // Act
-            var result = await repository.DeleteBettingAsync(betting.Id);
+            var result = await repository.DeleteBettingEventAsync(betting.Id);
 
             // Assert
             Assert.True(result);
@@ -105,7 +105,7 @@ namespace GamblerX.Tests.Infrastructure
             var nonExistentId = Guid.NewGuid();
 
             // Act
-            var result = await repository.DeleteBettingAsync(nonExistentId);
+            var result = await repository.DeleteBettingEventAsync(nonExistentId);
 
             // Assert
             Assert.False(result);

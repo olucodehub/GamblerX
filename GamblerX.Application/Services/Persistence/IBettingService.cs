@@ -5,10 +5,11 @@ namespace GamblerX.Application.Services.Persistence;
 
 public interface IBettingService
 {
-    Task<Betting> AddBettingAsync(Betting betting);
+    Task<Betting> AddBettingEvent(Betting betting);
 
-    Task<Betting> UpdateBettingAsync(Guid id, Betting updatedBetting);
+    Task<Betting> UpdateBettingEvent(Guid id, Betting updatedBetting);
 
-    Task<bool> DeleteBettingAsync(Guid id);
+    Task<bool> DeleteBettingEvent(Guid id);
 
+    Task<Bettor> PlaceBet(Bettor bettor);
 }

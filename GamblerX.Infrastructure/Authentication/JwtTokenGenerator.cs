@@ -22,10 +22,7 @@ public class JwtTokenGenerator : IJwTokenGenerator
    
    
     public string GenerateToken(User user)
-    {
-       //lets setup a SymmetricSecurityKey and use it to set up 
-       //signing credentials for JWT authentication
-               
+    {              
      // Generate a 256-bit key 
         byte[] secretKeyBytes = Encoding.UTF8.GetBytes(_jwtSettings.Secret);
         

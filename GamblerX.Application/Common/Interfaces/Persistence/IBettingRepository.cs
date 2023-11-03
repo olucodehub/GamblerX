@@ -5,7 +5,11 @@ namespace GamblerX.Application.Common.Interfaces.Persistence;
 
 public interface IBettingRepository
 {
-    Task<Betting> AddBettingAsync(Betting betting);
-    Task<Betting?> UpdateBettingAsync(Guid id, Betting updatedBetting);
-    Task<bool> DeleteBettingAsync(Guid id);
+    Task<Betting> AddBettingEventAsync(Betting betting);
+    Task<Betting?> UpdateBettingEventAsync(Guid id, Betting updatedBetting);
+    Task<bool> DeleteBettingEventAsync(Guid id);
+    Task<Betting?> GetBettingEventAsync(Guid id);
+
+    Task<Bettor> AddBettorAsync(Bettor bettor);
+    Task UpdateUserBalanceAsync(User user, double amount);
 }
